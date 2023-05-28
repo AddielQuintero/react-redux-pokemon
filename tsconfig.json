@@ -22,12 +22,14 @@
     /* Alias */
     "baseUrl": "./",
     "paths": {
-      "@": ["./src/*", "./dist/*", ""],
+      "@/*": ["./src/*", "./dist/*", ""],
       "@components": ["src/components/"],
       "@pages": ["src/pages/"],
       "@routes": ["src/routes/"],
       "@services": ["src/services/"],
       "@context": ["src/context/"],
+      "@redux": ["src/redux/"],
+      "@middleware": ["src/middleware/"],
       "@hooks": ["src/hooks/"],
       "@types": ["src/types/"],
       "@public": ["public/"],
