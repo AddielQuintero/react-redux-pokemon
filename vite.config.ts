@@ -14,6 +14,7 @@ export default defineConfig({
       '@services': path.resolve(__dirname, 'src/services/'),
       '@context': path.resolve(__dirname, 'src/context/'),
       '@redux': path.resolve(__dirname, 'src/redux/'),
+      '@middleware': path.resolve(__dirname, 'src/middleware/'),
       '@hooks': path.resolve(__dirname, 'src/hooks/'),
       '@types': path.resolve(__dirname, 'src/types'),
       '@public': path.resolve(__dirname, './public/'),

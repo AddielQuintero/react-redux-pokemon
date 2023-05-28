@@ -8,7 +8,7 @@ export const PokemonCard = ({ src, pokeName, types, ability }: PokemonCardProps)
   const pokemonTypes = types.map((item) => item.type.name)
 
   const styles = (type: string[], percent: number) => {
-    console.log('🚀  type:', type)
+    // console.log('🚀  type:', type)
     let background: string
     if (type.length > 1) {
       background = `linear-gradient(0deg, ${type.map((item) => typesColors[item].color + percent)}`

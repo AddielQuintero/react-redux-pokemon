@@ -29,6 +29,7 @@
       "@services": ["src/services/"],
       "@context": ["src/context/"],
       "@redux": ["src/redux/"],
+      "@middleware": ["src/middleware/"],
       "@hooks": ["src/hooks/"],
       "@types": ["src/types/"],
       "@public": ["public/"],
