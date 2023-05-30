@@ -7,7 +7,12 @@ export const logger = () => (next: Dispatch<Action>) => (action: Action) => {
 }
 
 export const prefix = () => (next: Dispatch<Action>) => (action: Action) => {
-  const prefix = action.payload.map((pokemon) => ({ ...pokemon, name: 'poke-' + pokemon.name }))
-  const updateAction = { ...action, payload: prefix }
-  next(updateAction)
+  console.log('🚀  action:', action)
+  if (action.type === 'SET_POKEMONS') {
+    const prefix = action.payload.map((pokemon) => ({ ...pokemon, name: 'poke-' + pokemon.name }))
+    const updateAction = { ...action, payload: prefix }
+    next(updateAction)
+  } else {
+    next(action)
+  }
 }
