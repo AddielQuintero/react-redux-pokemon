@@ -8,7 +8,7 @@ export const Search = () => {
         <div className="w-full relative">
           <CustomInput
             type="text"
-            className="w-full rounded-lg border border-gray-400 py-2 pl-2 pr-8"
+            className="w-full border border-gray-400 focus:outline-none focus:border-gray-500 rounded-lg  py-2 pl-2 pr-8"
             placeholder="Search ..."
           />
           <div className="flex absolute inset-y-0 right-2 items-center pl-3 pointer-events-none">
