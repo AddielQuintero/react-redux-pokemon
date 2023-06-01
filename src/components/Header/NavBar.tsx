@@ -3,7 +3,7 @@ import { BsGithub } from 'react-icons/bs'
 import logo from '@assets/logo.png'
 export const NavBar = () => {
   return (
-    <header className="sticky top-0 z-50 bg-gray-200/70">
+    <header className="sticky top-0 z-50 dark:bg-gray-800/95">
       <nav className="flex items-center justify-between p-3 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
           <a href="#" className="-m-1.5 p-1.5">
