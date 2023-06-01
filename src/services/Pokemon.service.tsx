@@ -1,10 +1,9 @@
 import axios from 'axios'
 import { TPokemon, TPokemonDetail } from '@types'
-
-const BASE_URL = 'https://pokeapi.co/api/v2/pokemon'
+import { CONFIG } from '@config'
 
 export const getPokemon = async (): Promise<TPokemon[]> => {
-  const response = await axios.get(`${BASE_URL}?limit=20`)
+  const response = await axios.get(`${CONFIG.API_BASE}?limit=20`)
   return response.data.results
 }
 
