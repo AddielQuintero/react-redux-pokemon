@@ -21,7 +21,7 @@ export const CustomCard = (props: CardProps) => {
                   className={item.classLink}
                   style={{
                     backgroundColor: `${item.styleLink.color}50`,
-                    color: `${item.styleLink.color}`,
+                    color: `${item.styleLink.color}`,                    
                   }}
                   key={item.label}
                 >
@@ -37,6 +37,7 @@ export const CustomCard = (props: CardProps) => {
             <p className={props.classBodyDescription}>{props.bodyDescription}</p>
           </div>
         )}
+        {props.children}
       </div>
     </>
   )
