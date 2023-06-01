@@ -1,5 +1,6 @@
 import { CSSProperties } from 'react'
 
+// Card
 export interface CardLinkProps {
   to: string
   label: string
@@ -7,7 +8,6 @@ export interface CardLinkProps {
   styleLink: any
 }
 
-// Card
 export interface CardProps {
   style?: CSSProperties
   className?: string

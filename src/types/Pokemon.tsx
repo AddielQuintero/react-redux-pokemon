@@ -1,6 +1,19 @@
+export interface PokemonCardProps {
+  id: number
+  favorite: boolean
+  pokeName: string
+  types: Type[]
+  ability: Ability[]
+  src: Sprites
+}
+
 export interface TPokemon {
   name: string
   url: string
+}
+
+export interface TPokemonFavorite {
+  id: number
 }
 
 export interface TPokemonDetail {
@@ -22,6 +35,7 @@ export interface TPokemonDetail {
   stats: Stat[]
   types: Type[]
   weight: number
+  isFavorite: boolean
 }
 
 export interface Ability {
@@ -183,11 +197,3 @@ export interface Type {
   slot: number
   type: Species
 }
-
-export interface PokemonCardProps {
-  pokeName: string
-  src: Sprites
-  types: Type[]
-  ability: Ability[]
-}
-
