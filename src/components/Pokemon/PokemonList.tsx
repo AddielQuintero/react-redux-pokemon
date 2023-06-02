@@ -21,11 +21,10 @@ export const PokemonList = () => {
     fetchData()
   }, [])
 
-  // <div className="mx-auto flex max-w-[1700px] flex-wrap items-center justify-center gap-5 overflow-hidden py-5 transition-colors duration-500">
   return (
     <div className="flex justify-center items-center flex-wrap gap-6 p-6 transition-colors duration-500">
       {isLoader
-        ? Array(10)
+        ? Array(20)
             .fill({})
             .map((_, index) => <PokemonCardSkeleton key={index} />)
         : pokemonsDetail.map((pokemon, index) => (
@@ -44,5 +43,5 @@ export const PokemonList = () => {
 }
 
 PokemonList.defaultProps = {
-  pokemons: Array(10).fill({}),
+  pokemons: Array(20).fill({}),
 }
