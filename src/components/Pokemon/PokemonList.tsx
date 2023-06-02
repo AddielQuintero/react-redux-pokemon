@@ -7,9 +7,8 @@ import { getPokemon } from '@services'
 
 export const PokemonList = () => {
   const pokemonsDetail = useSelector((state: State) => state.pokemons)
+  console.log('🚀  pokemonsDetail:', pokemonsDetail)
   const isLoader = useSelector((state: State) => state.isLoader)
-  const favorites = useSelector((state: State) => state.favorites)
-  console.log("🚀  favorites:", favorites)
 
   const dispatch = useDispatch()
 
@@ -22,8 +21,9 @@ export const PokemonList = () => {
     fetchData()
   }, [])
 
+  // <div className="mx-auto flex max-w-[1700px] flex-wrap items-center justify-center gap-5 overflow-hidden py-5 transition-colors duration-500">
   return (
-    <div className="flex justify-center items-center flex-wrap gap-6 p-6">
+    <div className="flex justify-center items-center flex-wrap gap-6 p-6 transition-colors duration-500">
       {isLoader
         ? Array(10)
             .fill({})
@@ -31,10 +31,10 @@ export const PokemonList = () => {
         : pokemonsDetail.map((pokemon, index) => (
             <PokemonCard
               id={pokemon.id}
-              favorite={pokemon.isFavorite}
+              favorite={pokemon.favorite}
               pokeName={pokemon.name}
               types={pokemon.types}
-              ability={pokemon.abilities}
+              abilities={pokemon.abilities}
               src={pokemon.sprites}
               key={index}
             />

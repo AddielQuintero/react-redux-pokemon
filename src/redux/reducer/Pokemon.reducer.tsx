@@ -8,17 +8,17 @@ export const PokemonsReducer = (state: State = initialState, action: Action) => 
     [TOGGLE_FAVORITE]: () => {
       const { payload } = action as TToggleFavorite
       const newPokemons = [...state.pokemons]
-      const newIsFavorite = [...state.favorites]
-      const pokemonIndex = newPokemons.findIndex((pokemon) => pokemon.id === payload)
+      const newFavorites = [...state.favorites]
+      const pokemonIndex = newPokemons.findIndex((pokemon) => pokemon.id === payload.id)
 
       if (pokemonIndex < 0) {
         return state
       }
 
-      newPokemons[pokemonIndex].isFavorite = !newPokemons[pokemonIndex].isFavorite
-      const favorites = newPokemons[pokemonIndex].isFavorite
-        ? [...newIsFavorite, newPokemons[pokemonIndex]]
-        : newIsFavorite.filter((pokemon) => pokemon.id !== payload)
+      newPokemons[pokemonIndex].favorite = !payload.favorite
+      const favorites = !payload.favorite
+        ? [...newFavorites, payload]
+        : newFavorites.filter((favorite) => favorite.id !== payload.id)
       localStorage.setItem('FAVORITES_V1', JSON.stringify(favorites))
       return { ...state, pokemons: newPokemons, favorites: favorites }
     },
@@ -42,7 +42,7 @@ export const PokemonsReducer = (state: State = initialState, action: Action) => 
 
 
 
-// const favorites = newPokemons.filter((pokemon) => pokemon.isFavorite)
+// const favorites = newPokemons.filter((pokemon) => pokemon.favorite)
 
 // SOLUTION #1
 // [TOGGLE_FAVORITE ]: () => {
@@ -54,8 +54,8 @@ export const PokemonsReducer = (state: State = initialState, action: Action) => 
 //     return state
 //   }
 
-//   newPokemons[pokemonIndex].isFavorite = !newPokemons[pokemonIndex].isFavorite
-//   const favorites = newPokemons.filter((pokemon) => pokemon.isFavorite)
+//   newPokemons[pokemonIndex].favorite = !newPokemons[pokemonIndex].favorite
+//   const favorites = newPokemons.filter((pokemon) => pokemon.favorite)
 //   localStorage.setItem('FAVORITES_V1', JSON.stringify(favorites))
 //   return { ...state, pokemons: newPokemons }
 // },
@@ -66,12 +66,12 @@ export const PokemonsReducer = (state: State = initialState, action: Action) => 
 //   const { payload } = action as TToggleFavorite
 //   const newPokemons = state.pokemons.map(pokemon => {
 //     if (pokemon.id === payload) {
-//       return { ...pokemon, isFavorite: !pokemon.isFavorite }
+//       return { ...pokemon, favorite: !pokemon.favorite }
 //     }
 //     return pokemon
 //   })
 
-//   const favorites = newPokemons.filter(pokemon => pokemon.isFavorite)
+//   const favorites = newPokemons.filter(pokemon => pokemon.favorite)
 //   localStorage.setItem('FAVORITES_V1', JSON.stringify(favorites))
 //   return { ...state, pokemons: newPokemons }
 // },
