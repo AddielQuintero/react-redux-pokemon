@@ -1,9 +1,9 @@
 import { Dispatch } from 'redux'
-import { Action, TPokemonDetail } from '@types'
+import { Action, TPokemonFavorite } from '@types'
 import { setFavorite } from '@redux'
 
 export const logger = () => (next: Dispatch<Action>) => (action: Action) => {
-  console.log('🚀  action:', action)
+  // console.log('🚀  action:', action)
   next(action)
 }
 
@@ -20,11 +20,11 @@ export const prefix = () => (next: Dispatch<Action>) => (action: Action) => {
 export const localStorageFavorites = () => (next: Dispatch<Action>) => (action: Action) => {
   if (action.type === 'SET_POKEMONS') {
     const favoriteStorage = localStorage.getItem('FAVORITES_V1')
-    const parseFavorite: TPokemonDetail[] = favoriteStorage ? JSON.parse(favoriteStorage) : []
+    const parseFavorite: TPokemonFavorite[] = favoriteStorage ? JSON.parse(favoriteStorage) : []
 
     const updatedPokemonsDetail = action.payload.map((pokemon) => {
-      const favoritePokemon = parseFavorite.find((favPokemon) => favPokemon.id === pokemon.id)
-      return favoritePokemon ? { ...pokemon, isFavorite: favoritePokemon.isFavorite } : pokemon
+      const favorite = parseFavorite.some((favPokemon) => favPokemon.id === pokemon.id)
+      return { ...pokemon, favorite }
     })
 
     const updateAction = { ...action, payload: updatedPokemonsDetail }
