@@ -13,11 +13,10 @@ export const Favorite = () => {
   useEffect(() => {
     const fetchData = async () => {
       const pokemons = await getPokemon()
-      // console.log("🚀  entre al effect de favorite:")
       dispatch(getPokemonDetailAction(pokemons))
     }
 
-    fetchData()
+    !favorites.length && fetchData()
   }, [])
 
   return (

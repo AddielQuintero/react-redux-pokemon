@@ -16,7 +16,7 @@ export const PokemonList = () => {
       dispatch(getPokemonDetailAction(pokemons))
     }
 
-    fetchData()
+    !pokemonsDetail.length && fetchData()
   }, [])
 
   return (
