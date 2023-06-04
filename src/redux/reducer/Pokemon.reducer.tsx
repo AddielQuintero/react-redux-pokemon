@@ -15,10 +15,10 @@ export const PokemonsReducer = (state: State = initialState, action: Action) => 
         return state
       }
 
-      newPokemons[pokemonIndex].favorite = !payload.favorite
-      const favorites = !payload.favorite
-        ? [...newFavorites, payload]
-        : newFavorites.filter((favorite) => favorite.id !== payload.id)
+      newPokemons[pokemonIndex].favorite = payload.favorite
+      const favorites = payload.favorite
+      ? [...newFavorites, payload]
+      : newFavorites.filter((favorite) => favorite.id !== payload.id)
       localStorage.setItem('FAVORITES_V1', JSON.stringify(favorites))
       return { ...state, pokemons: newPokemons, favorites: favorites }
     },

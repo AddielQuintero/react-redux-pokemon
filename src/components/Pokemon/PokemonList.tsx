@@ -7,9 +7,7 @@ import { getPokemon } from '@services'
 
 export const PokemonList = () => {
   const pokemonsDetail = useSelector((state: State) => state.pokemons)
-  console.log('🚀  pokemonsDetail:', pokemonsDetail)
   const isLoader = useSelector((state: State) => state.isLoader)
-
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -23,21 +21,23 @@ export const PokemonList = () => {
 
   return (
     <div className="flex justify-center items-center flex-wrap gap-6 p-6 transition-colors duration-500">
-      {isLoader
-        ? Array(20)
-            .fill({})
-            .map((_, index) => <PokemonCardSkeleton key={index} />)
-        : pokemonsDetail.map((pokemon, index) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+        {isLoader ? (
+          <PokemonCardSkeleton value={20} />
+        ) : (
+          pokemonsDetail.map((pokemon, index) => (
             <PokemonCard
               id={pokemon.id}
               favorite={pokemon.favorite}
-              pokeName={pokemon.name}
-              types={pokemon.types}
-              abilities={pokemon.abilities}
-              src={pokemon.sprites}
+              pokeName={pokemon.pokeName}
+              pokemonTypes={pokemon.pokemonTypes}
+              ability={pokemon.ability}
+              image={pokemon.image}
               key={index}
             />
-          ))}
+          ))
+        )}
+      </div>
     </div>
   )
 }

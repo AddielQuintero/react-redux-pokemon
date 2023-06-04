@@ -6,7 +6,7 @@ import thunk from 'redux-thunk'
 
 const store = createStore(
   PokemonsReducer,
-  composeWithDevTools(applyMiddleware(thunk, logger, prefix, localStorageFavorites))
+  composeWithDevTools(applyMiddleware(thunk, logger, localStorageFavorites, prefix ))
 )
 
 export { store }

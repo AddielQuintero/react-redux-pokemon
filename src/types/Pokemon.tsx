@@ -1,18 +1,9 @@
-export interface PokemonCardProps {
-  id: number
-  favorite: boolean
-  pokeName: string
-  types: Type[]
-  abilities: Ability[]
-  src: Sprites
-}
-
-export interface TPokemon {
+export interface TFetchPokemon {
   name: string
   url: string
 }
 
-export interface TPokemonFavorite {
+export interface TPokemon {
   id: number
   pokeName: string
   ability: string
@@ -20,6 +11,10 @@ export interface TPokemonFavorite {
   image: string
   favorite: boolean
 }
+
+export interface TPokemonFavorite extends TPokemon {}
+
+export interface PokemonCardProps extends TPokemon {}
 
 export interface PokemonFavoriteProps {
   favorite: boolean

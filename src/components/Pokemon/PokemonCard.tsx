@@ -1,17 +1,14 @@
 import { PokemonCardProps, typesColors } from '@types'
 import { CustomCard, PokemonFavorite } from '@components'
-import imageNotFound from '@assets/imageNotFound.webp'
 import { useDispatch } from 'react-redux'
 import { toggleFavorite } from '@redux'
 
-export const PokemonCard = ({ id, favorite, pokeName, types, abilities, src }: PokemonCardProps) => {
-  const image = src.other?.dream_world.front_default || imageNotFound
-  const { name: ability } = abilities[0].ability
-  const pokemonTypes = types.map((item) => item.type.name)
+export const PokemonCard = ({ id, favorite, pokeName, pokemonTypes, ability, image }: PokemonCardProps) => {
   const dispatch = useDispatch()
 
   const handleOnFavorite = () => {
-    dispatch(toggleFavorite({ id, pokeName, ability, image, pokemonTypes, favorite }))
+    console.log('click')
+    dispatch(toggleFavorite({ id, pokeName, ability, image, pokemonTypes, favorite: !favorite }))
   }
 
   const styles = (type: string[], percent: number) => {
@@ -27,10 +24,10 @@ export const PokemonCard = ({ id, favorite, pokeName, types, abilities, src }: P
   return (
     <CustomCard
       style={styles(pokemonTypes, 50)}
-      className="relative min-h-[290px] min-w-[250px] transform transition-transform hover:scale-105 group rounded-lg p-5  border-current hover:border"
-      classContentImg="rounded-full w-[60%] mx-auto border-current transition group-hover:border"
-      classImg="w-32 h-32 mx-auto"
-      classTitle="text-center text-2xl font-semibold mt-2"
+      className="relative min-h-[280px] w-[250px] md:w-[224px]  transform transition-transform hover:scale-105 group rounded-lg p-5  border-current hover:border"
+      classContentImg="min-h-[120px] min-w-[120px] w-1/2 mx-auto rounded-full border-current transition group-hover:border"
+      classImg="h-28 mx-auto"
+      classTitle="text-center text-xl font-semibold mt-2"
       classSubTitle="text-center font-bold text-gray-800 mt-1"
       classContentLink="flex justify-center gap-3 mt-3"
       title={pokeName}
