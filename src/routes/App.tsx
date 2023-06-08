@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { store } from '@redux'
 import { NavBar } from '@components'
-import { Favorite, Home, NotFound } from '@pages'
+import { Favorite, Home, Pokemon, NotFound } from '@pages'
 import { NavigateProps } from '@types'
 
 const navigation: NavigateProps = [
@@ -20,9 +20,9 @@ export const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/favorite" element={<Favorite />} />
+            <Route path="/:name" element={<Pokemon />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-
         </BrowserRouter>
       </Provider>
     </>
