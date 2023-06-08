@@ -22,3 +22,31 @@ export const typesColors: TColors = {
   fighting: { color: '#CB5F48' },
   electric: { color: '#E5C531' },
 }
+
+export const pokemonStats: { [key: string]: string } = {
+  hp: "HP",
+  attack: "ATT",
+  defense: "DEF",
+  "special-attack": "S-ATT",
+  "special-defense": "S-DEF",
+  speed: "SPED",
+};
+
+export const pokemonStatsColor: { [key: string]: string } = {
+  hp: "#ef4444", // Red
+  attack: "#f97316", // Orange
+  defense: "#eab308", // Yellow
+  "special-attack": "#a855f7", // Purple
+  "special-defense": "#06b6d4", // Cyan
+  speed: "#22c55e", // Green
+}
+
+export const styles = (type: string[], percent: number) => {
+  let background: string
+  if (type.length > 1) {
+    background = `linear-gradient(0deg, ${type.map((item) => typesColors[item].color + percent)}`
+  } else {
+    background = typesColors[type[0]].color + percent
+  }
+  return { background, color: typesColors[type[0]].color }
+}

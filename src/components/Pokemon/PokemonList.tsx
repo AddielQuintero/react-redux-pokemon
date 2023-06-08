@@ -1,22 +1,23 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { PokemonCard, PokemonCardSkeleton } from '@components'
-import { getPokemonDetailAction } from '@redux'
+import { getPokemonListDetail, setLoading } from '@redux'
 import { State } from '@types'
 import { getPokemon } from '@services'
 
 export const PokemonList = () => {
-  const pokemonsDetail = useSelector((state: State) => state.pokemons)
+  const pokemons = useSelector((state: State) => state.pokemons)
   const isLoader = useSelector((state: State) => state.isLoader)
   const dispatch = useDispatch()
 
   useEffect(() => {
     const fetchData = async () => {
+      dispatch(setLoading(true))
       const pokemons = await getPokemon()
-      dispatch(getPokemonDetailAction(pokemons))
+      dispatch(getPokemonListDetail(pokemons))
     }
 
-    !pokemonsDetail.length && fetchData()
+    !pokemons.length && fetchData()
   }, [])
 
   return (
@@ -25,7 +26,7 @@ export const PokemonList = () => {
         {isLoader ? (
           <PokemonCardSkeleton value={20} />
         ) : (
-          pokemonsDetail.map((pokemon, index) => (
+          pokemons.map((pokemon, index) => (
             <PokemonCard
               id={pokemon.id}
               favorite={pokemon.favorite}

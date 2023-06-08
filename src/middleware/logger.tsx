@@ -9,7 +9,7 @@ export const logger = () => (next: Dispatch<Action>) => (action: Action) => {
 
 export const prefix = () => (next: Dispatch<Action>) => (action: Action) => {
   if (action.type === 'SET_POKEMONS') {
-    const prefix = action.payload.map((pokemon) => ({ ...pokemon, name: 'poke-' + pokemon.pokeName }))
+    const prefix = action.payload.map((pokemon) => ({ ...pokemon, pokeName: 'poke-' + pokemon.pokeName }))
     const updateAction = { ...action, payload: prefix }
     next(updateAction)
   } else {
@@ -36,22 +36,3 @@ export const localStorageFavorites = () => (next: Dispatch<Action>) => (action: 
     next(action)
   }
 }
-
-
-// export const prefix = () => (next: Dispatch<Action>) => (action: Action) => {
-//   if (action.type === 'SET_POKEMONS') {
-//     const prefix = action.payload.map((pokemon) => {
-//       const image = pokemon.sprites.other?.dream_world.front_default || imageNotFound
-//       const { name: ability } = pokemon.abilities[0].ability
-//       const pokemonTypes = pokemon.types.map((item) => item.type.name)
-     
-//       return { id: pokemon.id, pokeName: 'poke-' + pokemon.name,  ability: ability, pokemonTypes, image, favorite: pokemon.favorite  }
-//     })
-//     console.log("🚀  action.payload:", action.payload)
-//     const updateAction = { ...action, payload: prefix }
-//     console.log("🚀  updateAction:", updateAction)
-//     next(updateAction)
-//   } else {
-//     next(action)
-//   }
-// }

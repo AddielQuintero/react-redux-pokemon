@@ -2,8 +2,6 @@ import { CardLinkProps, CardProps } from '@types'
 import { Link } from 'react-router-dom'
 
 export const CustomCard = (props: CardProps) => {
-  // const containerStyle = { ...props.style, border: `1px solid ${props.style?.color}` }
-
   return (
     <>
       <div className={props.className} style={props.style}>
@@ -21,7 +19,7 @@ export const CustomCard = (props: CardProps) => {
                   className={item.classLink}
                   style={{
                     backgroundColor: `${item.styleLink.color}50`,
-                    color: `${item.styleLink.color}`,                    
+                    color: `${item.styleLink.color}`,
                   }}
                   key={item.label}
                 >

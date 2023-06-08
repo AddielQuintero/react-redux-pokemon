@@ -1,5 +1,6 @@
-import { SET_LOADER, SET_POKEMONS, SET_FAVORITE, TOGGLE_FAVORITE, TFetchPokemon, TPokemon } from '@types'
-import { TSetLoader, TSetPokemon, TSetFavorite, TToggleFavorite, TPokemonFavorite, Action } from '@types'
+import { SET_LOADER, SET_POKEMONS, SET_POKEMON_DETAIL, SET_FAVORITE, TOGGLE_FAVORITE, Action } from '@types'
+import { TFetchPokemon, TPokemonFavorite, TPokemonDetail, TPokemonFilteredDetail, TPokemon } from '@types'
+import { TSetLoader, TSetPokemon, TSetFavorite, TSetPokemonFilteredDetail, TToggleFavorite } from '@types'
 import { getPokemonDetail } from '@services'
 import { Dispatch } from 'redux'
 import imageNotFound from '@assets/imageNotFound.webp'
@@ -7,6 +8,11 @@ import type {} from 'redux-thunk/extend-redux'
 
 export const setPokemons = (payload: TPokemon[]): TSetPokemon => ({
   type: SET_POKEMONS,
+  payload,
+})
+
+export const setPokemonFilteredDetail = (payload: TPokemonFilteredDetail): TSetPokemonFilteredDetail => ({
+  type: SET_POKEMON_DETAIL,
   payload,
 })
 
@@ -25,7 +31,7 @@ export const setFavorite = (payload: TPokemonFavorite[]): TSetFavorite => ({
   payload,
 })
 
-export const getPokemonDetailAction =
+export const getPokemonListDetail =
   (pokemons: TFetchPokemon[] = []) =>
   async (dispatch: Dispatch<Action>) => {
     const pokemonsDetail = await getPokemonDetail(pokemons)
@@ -48,3 +54,21 @@ export const getPokemonDetailAction =
     dispatch(setPokemons(prefix))
     dispatch(setLoading(false))
   }
+
+export const getPokemonDetailByName = (pokemon: TPokemonDetail) => async (dispatch: Dispatch<Action>) => {
+  const favoriteStorage = localStorage.getItem('FAVORITES_V1')
+  const parseFavorite: TPokemonFavorite[] = favoriteStorage ? JSON.parse(favoriteStorage) : []
+
+  const favorite = parseFavorite.some((favPokemon) => favPokemon.id === pokemon.id)
+  const id = pokemon.id
+  const image = pokemon.sprites.other?.dream_world.front_default || imageNotFound
+  const types = pokemon.types.map((item) => item.type.name)
+  const { name: ability } = pokemon.abilities[0].ability
+  const height = pokemon.height
+  const weight = pokemon.weight
+  const stats = pokemon.stats
+  
+  dispatch(setFavorite(parseFavorite))
+  dispatch(setPokemonFilteredDetail({ id, image, ability, types, height, weight, stats, favorite }))
+  dispatch(setLoading(false))
+}

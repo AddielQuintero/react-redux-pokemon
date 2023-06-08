@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { PokemonCard, PokemonCardSkeleton } from '@components'
-import { getPokemonDetailAction } from '@redux'
+import { getPokemonListDetail } from '@redux'
 import { getPokemon } from '@services'
 import { State } from '@types'
 
@@ -13,7 +13,7 @@ export const Favorite = () => {
   useEffect(() => {
     const fetchData = async () => {
       const pokemons = await getPokemon()
-      dispatch(getPokemonDetailAction(pokemons))
+      dispatch(getPokemonListDetail(pokemons))
     }
 
     !favorites.length && fetchData()

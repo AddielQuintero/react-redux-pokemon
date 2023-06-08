@@ -17,8 +17,20 @@ export interface TPokemonFavorite extends TPokemon {}
 export interface PokemonCardProps extends TPokemon {}
 
 export interface PokemonFavoriteProps {
+  className: string
   favorite: boolean
   handleOnFavorite: () => void
+}
+
+export interface TPokemonFilteredDetail  {
+  id: number;
+  ability: string
+  image: string;
+  types: string[]
+  height: number;
+  weight: number;
+  favorite: boolean
+  stats: Stat[];
 }
 
 export interface TPokemonDetail {

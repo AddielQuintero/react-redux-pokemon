@@ -17,6 +17,15 @@ export const getPokemonDetail = async (pokemons: TFetchPokemon[]) => {
   return res
 }
 
+export const getPokemonByName = async (pokemonName: string) => {
+  try {
+    const res = await axios.get<TPokemonDetail>(`${CONFIG.API_BASE}/${pokemonName}`)
+    return res.data
+  } catch {
+    return undefined
+  }
+}
+
 // export const PokemonService = () => {
 //   const dispatch = useDispatch()
 
