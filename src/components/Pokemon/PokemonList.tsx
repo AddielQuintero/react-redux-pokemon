@@ -22,7 +22,7 @@ export const PokemonList = () => {
 
   return (
     <div className="flex justify-center items-center flex-wrap gap-6 p-6 transition-colors duration-500">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
         {isLoader ? (
           <PokemonCardSkeleton value={20} />
         ) : (
