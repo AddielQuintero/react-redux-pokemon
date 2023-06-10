@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { BsArrowLeft } from 'react-icons/bs'
 import ProgressBar from '@ramonak/react-progress-bar'
@@ -10,7 +10,7 @@ import { getPokemonDetailByName, setPokemonFilteredDetail, toggleFavorite } from
 
 export const Pokemon = () => {
   const dispatch = useDispatch()
-  const pokemon = useSelector((state: TStore) => state.data.pokemonFilteredDetail)
+  const pokemon = useSelector((state: TStore) => state.data.pokemonFilteredDetail, shallowEqual)
   const isPokemonEmpty = Object.keys(pokemon).length === 0
   const { id, ability, image, types, height, weight, favorite, stats } = pokemon
   const { name } = useParams()
