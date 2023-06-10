@@ -29,7 +29,7 @@ export const pokemonStats: { [key: string]: string } = {
   defense: "DEF",
   "special-attack": "S-ATT",
   "special-defense": "S-DEF",
-  speed: "SPED",
+  speed: "SPEED",
 };
 
 export const pokemonStatsColor: { [key: string]: string } = {

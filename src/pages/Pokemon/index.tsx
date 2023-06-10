@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { BsArrowLeft } from 'react-icons/bs'
 import ProgressBar from '@ramonak/react-progress-bar'
-import { State, TPokemonFilteredDetail, pokemonStats, pokemonStatsColor, styles } from '@types'
+import { TStore, pokemonStats, pokemonStatsColor, styles } from '@types'
 import { CustomButton, PokemonFavorite, PokemonSkeleton } from '@components'
-import { getPokemonDetailByName, setPokemonFilteredDetail, toggleFavorite } from '@redux'
 import { getPokemonByName } from '@services'
+import { getPokemonDetailByName, setPokemonFilteredDetail, toggleFavorite } from '@redux'
 
 export const Pokemon = () => {
   const dispatch = useDispatch()
-  const pokemon = useSelector((state: State) => state.pokemonFilteredDetail)
+  const pokemon = useSelector((state: TStore) => state.data.pokemonFilteredDetail)
   const isPokemonEmpty = Object.keys(pokemon).length === 0
   const { id, ability, image, types, height, weight, favorite, stats } = pokemon
   const { name } = useParams()
@@ -27,6 +27,7 @@ export const Pokemon = () => {
   }
 
   const handleOnFavorite = () => {
+    console.log('click favorite')
     dispatch(
       toggleFavorite({ id, pokeName: name!, ability, image, pokemonTypes: types, favorite: !favorite })
     )
@@ -35,7 +36,7 @@ export const Pokemon = () => {
   useEffect(() => {
     fetchPokemon()
     return () => {
-      dispatch(setPokemonFilteredDetail({} as TPokemonFilteredDetail))
+      dispatch(setPokemonFilteredDetail({}))
     }
   }, [])
 

@@ -2,21 +2,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { PokemonCard, PokemonCardSkeleton } from '@components'
 import { getPokemonListDetail } from '@redux'
-import { getPokemon } from '@services'
-import { State } from '@types'
+import { TStore } from '@types'
 
 export const Favorite = () => {
-  const favorites = useSelector((state: State) => state.favorites)
-  const isLoader = useSelector((state: State) => state.isLoader)
+  const favorites = useSelector((state: TStore) => state.data.favorites)
+  const isLoader = useSelector((state: TStore) => state.data.isLoader)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const fetchData = async () => {
-      const pokemons = await getPokemon()
-      dispatch(getPokemonListDetail(pokemons))
-    }
-
-    !favorites.length && fetchData()
+    !favorites.length && dispatch(getPokemonListDetail())
   }, [])
 
   return (
