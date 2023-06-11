@@ -1,5 +1,4 @@
-import { MiddlewareArray, configureStore  } from '@reduxjs/toolkit'
-import thunk from 'redux-thunk'
+import { configureStore } from '@reduxjs/toolkit'
 import { useDispatch } from 'react-redux'
 import { localStorageFavorites, logger } from '@redux'
 import { DataSlice } from '@redux'
@@ -8,7 +7,8 @@ const store = configureStore({
   reducer: {
     data: DataSlice.reducer,
   },
-  middleware: new MiddlewareArray(thunk, logger, localStorageFavorites),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger, localStorageFavorites),
+  // middleware: new MiddlewareArray(thunk, logger, localStorageFavorites),
 })
 
 export { store }
