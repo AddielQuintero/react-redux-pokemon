@@ -1,13 +1,13 @@
-import { shallowEqual, useDispatch, useSelector } from 'react-redux'
+import { shallowEqual, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { PokemonCard, PokemonCardSkeleton } from '@components'
-import { getPokemonListDetail } from '@redux'
+import { getPokemonListDetail, useAppDispatch } from '@redux'
 import { TStore } from '@types'
 
 export const Favorite = () => {
   const favorites = useSelector((state: TStore) => state.data.favorites, shallowEqual)
   const isLoader = useSelector((state: TStore) => state.data.isLoader)
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     !favorites.length && dispatch(getPokemonListDetail())

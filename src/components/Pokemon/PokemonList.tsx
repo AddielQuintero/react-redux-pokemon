@@ -1,14 +1,13 @@
-import { useSelector, useDispatch, shallowEqual } from 'react-redux'
+import { useSelector, shallowEqual } from 'react-redux'
 import { useEffect } from 'react'
 import { PokemonCard, PokemonCardSkeleton } from '@components'
-import { getPokemonListDetail } from '@redux'
+import { getPokemonListDetail, useAppDispatch } from '@redux'
 import { TStore } from '@types'
-
 
 export const PokemonList = () => {
   const pokemons = useSelector((state: TStore) => state.data.pokemons, shallowEqual)
   const isLoader = useSelector((state: TStore) => state.data.isLoader)
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     !pokemons.length && dispatch(getPokemonListDetail())

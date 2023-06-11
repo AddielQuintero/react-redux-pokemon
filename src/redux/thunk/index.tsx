@@ -3,7 +3,7 @@ import { getPokemon, getPokemonDetail } from '@services'
 import imageNotFound from '@assets/imageNotFound.webp'
 import { TPokemonDetail, TPokemonFavorite,  } from '@types'
 import { setFavorite, setLoading, setPokemonFilteredDetail, setPokemons } from '@redux'
-import type {} from 'redux-thunk/extend-redux'
+// import type {} from 'redux-thunk/extend-redux'
 
 export const getPokemonListDetail = createAsyncThunk('data/getPokemonListDetail', async (_, { dispatch }) => {
     const pokemons = await getPokemon()
