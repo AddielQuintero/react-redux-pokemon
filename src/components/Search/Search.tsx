@@ -5,11 +5,14 @@ import { useNavigate } from 'react-router-dom'
 
 export const Search = () => {
   const [value, setValue] = useState('')
+  console.log("🚀  value:", value)
   const navigate = useNavigate()
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault()
-    value && navigate(`/search/${value.toLowerCase()}`)
+    const params = new URLSearchParams()
+    value.trim() && params.set('name', value.toLowerCase())
+    value.trim() && navigate({pathname: '/search', search: params.toString()})
     setValue('')
   }
 

@@ -56,7 +56,7 @@ export interface TPokemonDetail {
 }
 
 export interface PokemonDetailProps {
-  name?: string
+  name?: string | null
   isPokemonEmpty: boolean
   pokemon: TPokemonFilteredDetail
 }
