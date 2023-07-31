@@ -5,13 +5,14 @@ import { getPokemonByName } from '@/services'
 import { TStore } from '@/types'
 import { useEffect } from 'react'
 import { shallowEqual, useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 export const SearchPage = () => {
   const pokemon = useSelector((state: TStore) => state.data.pokemonFilteredDetail, shallowEqual)
   const { triggerErrorNotification } = useNotification()
   const isPokemonEmpty = Object.keys(pokemon).length === 0
-  const { keyword } = useParams()
+  const location = useLocation()
+  const keyword = new URLSearchParams(location.search).get('name')
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
