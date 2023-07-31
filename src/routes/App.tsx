@@ -4,6 +4,7 @@ import { store } from '@redux'
 import { NavBar } from '@components'
 import { Favorite, Home, Pokemon, NotFound, SearchPage } from '@pages'
 import { NavigateProps } from '@types'
+import { ToastContainer } from 'react-toastify'
 
 const navigation: NavigateProps = [
   { name: 'Home', to: '/', private: false },
@@ -15,6 +16,7 @@ export const App = () => {
     <>
       <Provider store={store}>
         <BrowserRouter>
+          <ToastContainer />
           <NavBar navigation={navigation} />
 
           <Routes>

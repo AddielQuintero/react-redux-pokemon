@@ -1,4 +1,5 @@
 import { PokemonDetail, Search } from '@/components'
+import { useNotification } from '@/hooks'
 import { getPokemonDetailByName, setPokemonFilteredDetail, useAppDispatch } from '@/redux'
 import { getPokemonByName } from '@/services'
 import { TStore } from '@/types'
@@ -8,6 +9,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 export const SearchPage = () => {
   const pokemon = useSelector((state: TStore) => state.data.pokemonFilteredDetail, shallowEqual)
+  const { triggerErrorNotification } = useNotification()
   const isPokemonEmpty = Object.keys(pokemon).length === 0
   const { keyword } = useParams()
   const dispatch = useAppDispatch()
@@ -17,6 +19,7 @@ export const SearchPage = () => {
     const response = await getPokemonByName(keyword)
 
     if (!response) {
+      triggerErrorNotification('Pokemon does not exist')
       return navigate('/')
     }
 
