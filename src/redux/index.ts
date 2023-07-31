@@ -1,3 +1,5 @@
-export * from './action';
-export * from './reducer/Pokemon.reducer';
+export * from './index';
+export * from './middleware';
+export * from './slice';
 export * from './store';
+export * from './thunk';

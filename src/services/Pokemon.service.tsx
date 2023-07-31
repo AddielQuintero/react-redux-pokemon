@@ -25,24 +25,3 @@ export const getPokemonByName = async (pokemonName: string) => {
     return undefined
   }
 }
-
-// export const PokemonService = () => {
-//   const dispatch = useDispatch()
-
-//   useEffect(() => {
-//     const getPokemon = async () => {
-//       const response = await axios.get(`${BASE_URL}?limit=20`)
-//       const res = await Promise.all<TPokemonDetail[]>(
-//         response.data.results.map(async (pokemon: TFetchPokemon) => {
-//           const result = await axios.get(pokemon.url)
-//           return result.data
-//         })
-//       )
-//       dispatch(setPokemons(res))
-//       // setPokemons(res)
-//       return res
-//     }
-
-//     getPokemon()
-//   }, [])
-// }

@@ -1,12 +1,17 @@
-import { applyMiddleware, legacy_createStore as createStore } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension'
-import { PokemonsReducer } from '@redux'
-import { localStorageFavorites, logger } from '@middleware'
-import thunk from 'redux-thunk'
+import { configureStore } from '@reduxjs/toolkit'
+import { useDispatch } from 'react-redux'
+import { localStorageFavorites, logger } from '@redux'
+import { DataSlice } from '@redux'
 
-const store = createStore(
-  PokemonsReducer,
-  composeWithDevTools(applyMiddleware(thunk, logger, localStorageFavorites ))
-)
+const store = configureStore({
+  reducer: {
+    data: DataSlice.reducer,
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger, localStorageFavorites),
+  // middleware: new MiddlewareArray(thunk, logger, localStorageFavorites),
+})
 
 export { store }
+
+export type AppDispatch = typeof store.dispatch
+export const useAppDispatch = () => useDispatch<AppDispatch>()

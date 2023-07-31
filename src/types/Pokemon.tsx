@@ -55,6 +55,12 @@ export interface TPokemonDetail {
   favorite: boolean
 }
 
+export interface PokemonDetailProps {
+  name?: string
+  isPokemonEmpty: boolean
+  pokemon: TPokemonFilteredDetail
+}
+
 export interface Ability {
   ability: Species
   is_hidden: boolean
