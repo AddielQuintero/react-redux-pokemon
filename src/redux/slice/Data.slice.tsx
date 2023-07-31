@@ -18,29 +18,20 @@ export const DataSlice = createSlice({
       state.pokemonFilteredDetail = action.payload
     },
     toggleFavorite: (state, action) => {
+      const pokemon = action.payload
       const pokemonIndex = state.pokemons.findIndex((pokemon) => pokemon.id === action.payload.id)
+      const isAlreadyFavorite = state.favorites.some((favorite) => favorite.id === pokemon.id)
 
-      if (!state.pokemons.length) {
-        const favorites = action.payload.favorite
-          ? [...state.favorites, action.payload]
-          : state.favorites.filter((favorite) => favorite.id !== action.payload.id)
+      const updatedFavorites = isAlreadyFavorite
+        ? state.favorites.filter((favorite) => favorite.id !== pokemon.id)
+        : [...state.favorites, pokemon]
 
-        localStorage.setItem('FAVORITES_V1', JSON.stringify(favorites))
-        state.favorites = favorites
-        state.pokemonFilteredDetail.favorite = action.payload.favorite
-      }
-
+      localStorage.setItem('FAVORITES_V1', JSON.stringify(updatedFavorites))
+      state.favorites = updatedFavorites
       if (pokemonIndex >= 0) {
-        const favorites = action.payload.favorite
-          ? [...state.favorites, action.payload]
-          : state.favorites.filter((favorite) => favorite.id !== action.payload.id)
-
-        localStorage.setItem('FAVORITES_V1', JSON.stringify(favorites))
-
-        state.favorites = favorites
-        state.pokemons[pokemonIndex].favorite = action.payload.favorite
-        state.pokemonFilteredDetail.favorite = action.payload.favorite
+        state.pokemons[pokemonIndex].favorite = pokemon.favorite
       }
+      state.pokemonFilteredDetail.favorite = pokemon.favorite
     },
   },
 })
