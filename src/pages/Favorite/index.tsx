@@ -10,7 +10,7 @@ export const Favorite = () => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    !favorites.length && dispatch(getPokemonListDetail())
+    !favorites.length && dispatch(getPokemonListDetail(0))
   }, [])
 
   return (
