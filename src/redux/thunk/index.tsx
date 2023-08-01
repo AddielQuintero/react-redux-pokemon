@@ -1,13 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { getPokemon, getPokemonDetail } from '@services'
 import imageNotFound from '@assets/imageNotFound.webp'
-import { TPokemonDetail, TPokemonFavorite,  } from '@types'
+import { ParamsProps, TPokemonDetail, TPokemonFavorite } from '@types'
 import { setFavorite, setLoading, setPokemonFilteredDetail, setPokemons } from '@redux'
 // import type {} from 'redux-thunk/extend-redux'
 
-export const getPokemonListDetail = createAsyncThunk('data/getPokemonListDetail', async (_, { dispatch }) => {
-    const pokemons = await getPokemon()
-    const pokemonsDetail = await getPokemonDetail(pokemons)
+export const getPokemonListDetail = createAsyncThunk('data/getPokemonListDetail', async (offset: number, { dispatch }) => {
+    const params: ParamsProps = {
+      offset: offset
+    }
+    const pokemons = await getPokemon(params)
+    const pokemonsDetail = await getPokemonDetail(pokemons.results)
   
     const prefix = pokemonsDetail.map((pokemon) => {
       const image = pokemon.sprites.other?.dream_world.front_default || imageNotFound
@@ -26,6 +29,10 @@ export const getPokemonListDetail = createAsyncThunk('data/getPokemonListDetail'
   
     dispatch(setPokemons(prefix))
     dispatch(setLoading(false))
+
+    return {
+      hasMore: !!pokemons.next,
+    };
   })
   
   export const getPokemonDetailByName = createAsyncThunk(

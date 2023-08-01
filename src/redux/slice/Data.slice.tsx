@@ -9,7 +9,7 @@ export const DataSlice = createSlice({
       state.isLoader = action.payload
     },
     setPokemons: (state, action) => {
-      state.pokemons = action.payload
+      state.pokemons = [...state.pokemons, ...action.payload]
     },
     setFavorite: (state, action) => {
       state.favorites = action.payload

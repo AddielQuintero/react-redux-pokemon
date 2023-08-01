@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom'
 
 export const Search = () => {
   const [value, setValue] = useState('')
-  console.log("🚀  value:", value)
   const navigate = useNavigate()
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
