@@ -1,15 +1,15 @@
 import axios from 'axios'
-import { TFetchPokemon, TPokemonDetail } from '@types'
+import { FetchPokemonProps, ParamsProps, TFetchPokemon, TPokemonDetail } from '@types'
 import { CONFIG } from '@config'
 
-export const getPokemon = async (): Promise<TFetchPokemon[]> => {
-  const response = await axios.get(`${CONFIG.API_BASE}?limit=20`)
-  return response.data.results
+export const getPokemon = async (params: ParamsProps): Promise<TFetchPokemon> => {
+  const response = await axios.get(`${CONFIG.API_BASE}`, { params })
+  return response.data
 }
 
-export const getPokemonDetail = async (pokemons: TFetchPokemon[]) => {
+export const getPokemonDetail = async (pokemons: FetchPokemonProps[]) => {
   const res = await Promise.all<TPokemonDetail>(
-    pokemons.map(async (pokemon: TFetchPokemon) => {
+    pokemons.map(async (pokemon: FetchPokemonProps) => {
       const result = await axios.get(pokemon.url)
       return result.data
     })

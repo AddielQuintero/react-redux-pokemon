@@ -1,6 +1,18 @@
 export interface TFetchPokemon {
+  count: number
+  next: string | null
+  previous: string | null
+  results: FetchPokemonProps[]
+  
+}
+
+export interface FetchPokemonProps {
   name: string
   url: string
+}
+
+export interface ParamsProps {
+  offset: number
 }
 
 export interface TPokemon {
